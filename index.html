@@ -1,0 +1,47 @@
+<!--Tris
+Regole del gioco:
+1. Il gioco si svolge su una griglia 3x3.
+2. Due giocatori, X e O, si alternano nel posizionare il proprio simbolo in una cella vuota della griglia.
+3. Il primo giocatore a posizionare tre simboli in fila, colonna o diagonale vince la partita.
+4. Se tutte le celle sono piene e nessun giocatore ha vinto, la partita termina in pareggio.
+-->
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tris</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gioco del Tris</h1>
+        <div id="partitaTitle">
+            <p>TURNO DI <span id="currentPlayerID"></span></p>
+          </div>
+        <div class="campo">
+            <table>
+                <tr>   
+                    <td id="cell-1" class="cell" onclick="posiziona(this)"></td>
+                    <td id="cell-2" class="cell" onclick="posiziona(this)"></td>
+                    <td id="cell-3" class="cell" onclick="posiziona(this)"></td>
+                </tr>
+                <tr>
+                    <td id="cell-4" class="cell" onclick="posiziona(this)"></td>
+                    <td id="cell-5" class="cell" onclick="posiziona(this)"></td>
+                    <td id="cell-6" class="cell" onclick="posiziona(this)"></td>
+                </tr>
+                <tr>
+                    <td id="cell-7" class="cell" onclick="posiziona(this)"></td>
+                    <td id="cell-8" class="cell" onclick="posiziona(this)"></td>
+                    <td id="cell-9" class="cell" onclick="posiziona(this)"></td>
+                </tr>
+            </table>
+        </div>
+
+        <button id="reset" onclick="resetGame()">Nuova Partita</button>
+    
+    <script src="script.js"></script>
+</body>
+</html>
