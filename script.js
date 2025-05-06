@@ -34,15 +34,69 @@ function posiziona(cell) {
         cell.textContent = currentPlayer.symbol; // Posiziono il simbolo del giocatore corrente
         cell.style.color = currentPlayer.symbol === "X" ? "blue" : "red"; // Cambio il colore del testo in base al simbolo
     }
+
+    // Controllo se il giocatore corrente ha vinto
+    if (controllaVittoria()) {
+        alert(currentPlayer.name + " ha vinto!"); // Mostro un messaggio di vittoria
+        document.getElementById("reset").style.display = "block"; // Mostro il bottone di reset
+        return; // Esco dalla funzione se c'è un vincitore
+    }
+
+
     // Cambio il giocatore corrente
     currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
     // Aggiorno il testo del giocatore corrente nell'HTML
     document.getElementById("currentPlayerID").textContent = currentPlayer.name;
 }
-    
 
+function controllaVittoria() {
+    // Ottengo tutte le celle della griglia
+    const celle = document.querySelectorAll(".cell");
+    // Controllo le righe
+    for (let i = 0; i < 3; i++) {
+        if (celle[i * 3].textContent === currentPlayer.symbol &&
+            celle[i * 3 + 1].textContent === currentPlayer.symbol &&
+            celle[i * 3 + 2].textContent === currentPlayer.symbol) {
+            return true; // Vittoria in riga
+        }
+    }
+    // Controllo le colonne
+    for (let i = 0; i < 3; i++) {
+        if (celle[i].textContent === currentPlayer.symbol &&
+            celle[i + 3].textContent === currentPlayer.symbol &&
+            celle[i + 6].textContent === currentPlayer.symbol) {
+            return true; // Vittoria in colonna
+        }
+    }
+    // Controllo le diagonali
+    if (celle[0].textContent === currentPlayer.symbol &&
+        celle[4].textContent === currentPlayer.symbol &&
+        celle[8].textContent === currentPlayer.symbol) {
+        return true; // Vittoria diagonale principale
+    }
+    if (celle[2].textContent === currentPlayer.symbol &&
+        celle[4].textContent === currentPlayer.symbol &&
+        celle[6].textContent === currentPlayer.symbol) {
+        return true; // Vittoria diagonale secondaria
+    }
+
+    // Controllo pareggio
+    let pareggio = true;
+    for (let i = 0; i < celle.length; i++) {
+        if (celle[i].textContent === "") {
+            pareggio = false;
+            break;
+        }
+    }
+    if (pareggio) {
+        alert("Pareggio!"); // Mostro un messaggio di pareggio
+        document.getElementById("reset").style.display = "block"; // Mostro il bottone di reset
+    }
+
+    return false; // Nessun vincitore o pareggio
+}
 
 // Resetto la pagina
-function resetPage() {
+function resetGame() {
     location.reload();
 }
