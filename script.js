@@ -111,5 +111,10 @@ function controllaVittoria() {
 
 // Resetto la pagina
 function resetGame() {
-    location.reload();
+    const celle = document.querySelectorAll(".cell"); // Ottengo tutte le celle della griglia
+    celle.forEach(cella => {
+        cella.textContent = ""; // Resetto il contenuto di ogni cella
+    });
+    currentPlayer = players[0]; // Resetto il giocatore corrente
+    document.getElementById("reset").style.display = "none"; // Nascondo il bottone di reset
 }
