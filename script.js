@@ -8,13 +8,18 @@
 
 // Inizializza la variabile per i giocatori
 let players = [
-    { name: "GIOCATORE 1", symbol: "X" },
-    { name: "GIOCATORE 2", symbol: "O" }
+    { name: "GIOCATORE 1", symbol: "X", punteggio: 0 },
+    { name: "GIOCATORE 2", symbol: "O", punteggio: 0 }
 ];
 
 // Uso una variabile currentPlayer per memorizzare quale giocatore sta giocando
 let currentPlayer = players[0]; // Passo la referenza al JSON
 console.log("currentPlayer", currentPlayer);
+
+let punteggio = players.punteggio; // Inizializzo il punteggio a 0
+console.log("punteggio", punteggio);
+document.getElementById("scorePlayer1").textContent = players[0].punteggio; // Mostro il punteggio nell'HTML
+document.getElementById("scorePlayer2").textContent = players[1].punteggio; // Mostro il punteggio nell'HTML
 
 // Evento che si attiva quando il DOM è completamente caricato
 document.addEventListener("DOMContentLoaded", (event) => {
@@ -39,6 +44,14 @@ function posiziona(cell) {
     if (controllaVittoria()) {
         alert(currentPlayer.name + " ha vinto!"); // Mostro un messaggio di vittoria
         document.getElementById("reset").style.display = "block"; // Mostro il bottone di reset
+        // Incremento il punteggio del giocatore vincente
+        if (currentPlayer.symbol === "X") {
+            players[0].punteggio++;
+            document.getElementById("scorePlayer1").textContent = players[0].punteggio; // Aggiorno il punteggio nell'HTML
+        } else {
+            players[1].punteggio++;
+            document.getElementById("scorePlayer2").textContent = players[1].punteggio; // Aggiorno il punteggio nell'HTML
+        }
         return; // Esco dalla funzione se c'è un vincitore
     }
 
